@@ -57,7 +57,7 @@ jobs:
       - name: Go Release Binaries Normal Volume Size
         uses: wangyoucao577/go-release-action@v1.20
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           asset_name: "${{ matrix.goos }}_${{ matrix.goarch }}"
@@ -69,7 +69,7 @@ jobs:
       - name: Update release
         uses: tubone24/update_release@v1.2.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SECRET_TOKEN }}
           draft: false
 
 
