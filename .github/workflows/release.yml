@@ -67,7 +67,7 @@ jobs:
           overwrite: true
           
       - name: Update release
-        uses: johnwbyrd/update-release@v1
+        uses: tubone24/update_release@v1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
