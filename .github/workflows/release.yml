@@ -26,12 +26,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: true
+          release_name: Draft Release ${{ github.ref }}
+          draft: false
           prerelease: false
 
  build-release-binaries:
@@ -57,7 +53,7 @@ jobs:
       - name: Go Release Binaries Normal Volume Size
         uses: wangyoucao577/go-release-action@v1.20
         with:
-          github_token: ${{ secrets.SECRET_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           asset_name: "${{ matrix.goos }}_${{ matrix.goarch }}"
@@ -69,7 +65,7 @@ jobs:
       - name: Update release
         uses: tubone24/update_release@v1.2.0
         with:
-          token: ${{ secrets.SECRET_TOKEN }}
-          draft: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release_name: Release ${{ github.ref }}
 
 
