@@ -65,7 +65,6 @@ jobs:
       - name: Update release
         uses: tubone24/update_release@v1.2.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           release_name: Release ${{ github.ref }}
 
 
