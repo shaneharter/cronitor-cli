@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         goos: [linux]
-        goarch: [386, amd64, arm64]
+        goarch: [amd64]
         
     steps:
       - uses: actions/checkout@v2
@@ -60,8 +60,19 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        goos: [darwin, windows, freebsd]
-        goarch: [amd64, arm64]
+        goos: [linux, windows, darwin, freebsd]
+        goarch: [amd64, arm, arm64]
+        exclude:
+          - goarch: arm
+            goos: darwin
+          - goarch: 386
+            goos: darwin
+          - goarch: arm
+            goos: windows
+          - goarch: arm64
+            goos: windows
+          - goarch: amd64
+            goos: linux
         
     steps:
       - uses: actions/checkout@v2
