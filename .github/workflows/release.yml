@@ -37,14 +37,10 @@ jobs:
       max-parallel: 6
       matrix:
         goos: [linux, windows, darwin, freebsd]
-        goarch: [amd64, arm, arm64]
+        goarch: [amd64, arm64]
         exclude:
-          - goarch: arm
-            goos: darwin
           - goarch: 386
             goos: darwin
-          - goarch: arm
-            goos: windows
           - goarch: arm64
             goos: windows
     steps:
