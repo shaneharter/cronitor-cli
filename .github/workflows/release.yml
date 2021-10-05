@@ -60,7 +60,7 @@ jobs:
           binary_name: "cronitor"
           sha256sum: true
           overwrite: true
-          build_command: 'CGO_ENABLED=0 go build .'
+          pre_command: 'export CGO_ENABLED=0'
           ldflags: '-linkmode external -w -extldflags "-static"'
 
   publish:
