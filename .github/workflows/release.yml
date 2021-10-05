@@ -80,7 +80,7 @@ jobs:
   publish:
     name: Mark build complete
     runs-on: ubuntu-latest
-    needs: build-release-binaries
+    needs: [build-binaries, build-static-binaries]
     steps:
       - name: Get the version
         id: get_version
