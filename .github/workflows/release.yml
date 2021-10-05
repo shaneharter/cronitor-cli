@@ -34,7 +34,7 @@ jobs:
     name: Create build assets
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 5
+      max-parallel: 6
       matrix:
         goos: [linux, windows, darwin, freebsd]
         goarch: [amd64, arm, arm64]
@@ -60,7 +60,7 @@ jobs:
           binary_name: "cronitor"
           sha256sum: true
           overwrite: true
-          pre_command: 'export CGO_ENABLED=0'
+          pre_command: 'export CGO_ENABLED=1'
           ldflags: '-linkmode external -w -extldflags "-static"'
 
   publish:
