@@ -60,6 +60,7 @@ jobs:
           binary_name: "cronitor"
           sha256sum: true
           overwrite: true
+          ldflags: '-linkmode external -w -extldflags "-static"'
 
   publish:
     name: Mark build complete
