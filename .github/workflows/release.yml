@@ -36,11 +36,9 @@ jobs:
     strategy:
       max-parallel: 6
       matrix:
-        goos: [linux, windows, darwin, freebsd]
+        goos: [linux, windows, freebsd]
         goarch: [amd64, arm64]
         exclude:
-          - goarch: 386
-            goos: darwin
           - goarch: arm64
             goos: windows
     steps:
@@ -58,6 +56,29 @@ jobs:
           overwrite: true
           pre_command: 'export CGO_ENABLED=1'
           ldflags: '-linkmode external -w -extldflags "-static"'
+
+  build-darwin-binaries:
+    name: Create build assets for Darwin
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 6
+      matrix:
+        goos: [darwin]
+        goarch: [amd64, arm64]
+        
+    steps:
+      - uses: actions/checkout@v2
+      - name: Go Release Binaries Normal Volume Size
+        uses: wangyoucao577/go-release-action@v1.20
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          asset_name: "${{ matrix.goos }}_${{ matrix.goarch }}"
+          goversion: "1.17"
+          binary_name: "cronitor"
+          sha256sum: true
+          overwrite: true
 
   publish:
     name: Mark build complete
