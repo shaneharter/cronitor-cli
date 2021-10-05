@@ -30,17 +30,14 @@ jobs:
           draft: false
           prerelease: false
 
-  build-release-binaries:
-    name: Create build assets
+  build-static-binaries:
+    name: Create statically-linked build assets
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 6
       matrix:
-        goos: [linux, windows, freebsd]
-        goarch: [amd64, arm64]
-        exclude:
-          - goarch: arm64
-            goos: windows
+        goos: [linux]
+        goarch: [386, amd64, arm64]
+        
     steps:
       - uses: actions/checkout@v2
       - name: Go Release Binaries Normal Volume Size
@@ -57,13 +54,13 @@ jobs:
           pre_command: 'export CGO_ENABLED=1'
           ldflags: '-linkmode external -w -extldflags "-static"'
 
-  build-darwin-binaries:
-    name: Create build assets for Darwin
+  build-binaries:
+    name: Create build assets
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 6
+      max-parallel: 4
       matrix:
-        goos: [darwin]
+        goos: [darwin, windows, freebsd]
         goarch: [amd64, arm64]
         
     steps:
