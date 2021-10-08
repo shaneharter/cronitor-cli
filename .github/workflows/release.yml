@@ -58,9 +58,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          asset_name: "${{ matrix.goos }}_${{ matrix.goarch }}"
-          goversion: "1.17"
-          binary_name: "cronitor"
+          asset_name: ${{ matrix.goos }}_${{ matrix.goarch }}
+          goversion: 1.17
+          binary_name: cronitor
           sha256sum: true
           overwrite: true
           pre_command: export CGO_ENABLED=0
@@ -68,7 +68,7 @@ jobs:
   publish:
     name: Mark build complete
     runs-on: ubuntu-latest
-    needs: [build-binaries, build-static-binaries]
+    needs: [build-binaries]
     steps:
       - name: Get the version
         id: get_version
