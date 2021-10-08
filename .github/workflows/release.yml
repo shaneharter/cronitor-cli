@@ -52,7 +52,6 @@ jobs:
           sha256sum: true
           overwrite: true
           pre_command: 'export CGO_ENABLED=0'
-          ldflags: '-linkmode external -w -extldflags "-static"'
 
   build-binaries:
     name: Create build assets
