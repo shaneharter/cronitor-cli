@@ -30,29 +30,6 @@ jobs:
           draft: false
           prerelease: false
 
-  build-static-binaries:
-    name: Create statically-linked build assets
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        goos: [linux]
-        goarch: [amd64]
-        
-    steps:
-      - uses: actions/checkout@v2
-      - name: Go Release Binaries Normal Volume Size
-        uses: wangyoucao577/go-release-action@v1.20
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: ${{ matrix.goos }}
-          goarch: ${{ matrix.goarch }}
-          asset_name: "${{ matrix.goos }}_${{ matrix.goarch }}"
-          goversion: "1.17"
-          binary_name: "cronitor"
-          sha256sum: true
-          overwrite: true
-          pre_command: export CGO_ENABLED=0
-
   build-binaries:
     name: Create build assets
     runs-on: ubuntu-latest
