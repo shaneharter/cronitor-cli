@@ -51,7 +51,7 @@ jobs:
           binary_name: "cronitor"
           sha256sum: true
           overwrite: true
-          pre_command: 'export CGO_ENABLED=0'
+          pre_command: export CGO_ENABLED=0
 
   build-binaries:
     name: Create build assets
@@ -86,6 +86,7 @@ jobs:
           binary_name: "cronitor"
           sha256sum: true
           overwrite: true
+          pre_command: export CGO_ENABLED=0
 
   publish:
     name: Mark build complete
